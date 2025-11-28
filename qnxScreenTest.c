@@ -23,6 +23,7 @@ static inline void putPixel(void *bufPtr, int x, int y, pixel_t pix);
 void printKeyFlags(int flags);
 void printModifiers(int modifiers);
 void printMouseButtons(int buttons);
+void printPCKeys(int keyCode);
 
 #define PROMPT "\n*==> "
 
@@ -174,12 +175,12 @@ int main(void) {
 	break;
 	
       case SCREEN_EVENT_KEYBOARD:
-	printf("\nGot KEYBOARD Event");
+	/* printf("\nGot KEYBOARD Event"); */
 	handleKeyboardEvent(event);
 	break;
 
       case SCREEN_EVENT_POINTER:
-	printf("\nGot MOUSE POINTER Event");
+	/* printf("\nGot MOUSE POINTER Event"); */
 	handlePointerEvent(event);
 	break;
 
@@ -281,12 +282,13 @@ Event Type: SCREEN_EVENT_KEYBOARD
   screen_get_event_property_iv(keyEvent, SCREEN_PROPERTY_FLAGS, &keyFlags);
   screen_get_event_property_iv(keyEvent, SCREEN_PROPERTY_MODIFIERS, &keyModifiers);
 
-  if ((keyValue > 0x41) && (keyValue < 0x7F))
-    printf("\n ASCII key '%c'", keyValue);
+  if ((keyValue > 0x20) && (keyValue < 0x7F))
+    printf("\n ASCII '%c' ", keyValue);
   else
     printf("\n");
+  printPCKeys(keyValue);  /* NON-ASII, e.g. keypadkeys, home, .. */
+  printModifiers(keyModifiers); /* SHIFT, etc. */
   printf(" KeyCode=0x%lx ", keyValue);
-  printModifiers(keyModifiers);
   printKeyFlags(keyFlags);
 
   if (keyFlags & SCREEN_FLAG_CAP_VALID) {
@@ -311,6 +313,8 @@ void printKeyFlags(int flags) {
   
   if (flags & SCREEN_FLAG_KEY_DOWN)
     printf("KeyDOWN ");
+  else
+    printf("KeyUP ");
 
   if (flags & SCREEN_FLAG_KEY_REPEAT)
     printf("KeyRepeat ");
@@ -431,5 +435,193 @@ void printModifiers(int modifiers)
   if (modifiers & KEYMOD_SCROLL_LOCK )
     printf("ScrollLock  ");
 }
+
+void printPCKeys(int keyCode)
+{
+  if ((keyCode > KEYCODE_PC_KEYS) && (keyCode <= KEYCODE_F12)) {
+    switch (keyCode) {
+    case KEYCODE_PAUSE:
+      printf("PAUSE ");
+      break;
+    case KEYCODE_SCROLL_LOCK:
+      printf("SCROLL_LOCK ");
+      break;
+    case KEYCODE_PRINT:
+      printf("PRINT ");
+      break;
+    case KEYCODE_SYSREQ:
+      printf("SYSREQ ");
+      break;
+    case KEYCODE_BREAK:
+      printf("BREAK ");
+      break;
+    case KEYCODE_ESCAPE:
+      printf("ESCAPE ");
+      break;
+    case KEYCODE_BACKSPACE:
+      printf("BACKSPACE ");
+      break;
+    case KEYCODE_TAB:
+      printf("TAB ");
+      break;
+    case KEYCODE_BACK_TAB:
+      printf("BACK_TAB ");
+      break;
+    case KEYCODE_RETURN:
+      printf("RETURN ");
+      break;
+    case KEYCODE_CAPS_LOCK:
+      printf("CAPS_LOCK ");
+      break;
+    case KEYCODE_LEFT_SHIFT:
+      printf("LEFT_SHIFT ");
+      break;
+    case KEYCODE_RIGHT_SHIFT:
+      printf("RIGHT_SHIFT ");
+      break;
+    case KEYCODE_LEFT_CTRL:
+      printf("LEFT_CTRL ");
+      break;
+    case KEYCODE_RIGHT_CTRL:
+      printf("RIGHT_CTRL ");
+      break;
+    case KEYCODE_LEFT_ALT:
+      printf("LEFT_ALT ");
+      break;
+    case KEYCODE_RIGHT_ALT:
+      printf("RIGHT_ALT ");
+      break;
+    case KEYCODE_MENU:
+      printf("MENU ");
+      break;
+    case KEYCODE_LEFT_HYPER:
+      printf("LEFT_HYPER ");
+      break;
+    case KEYCODE_RIGHT_HYPER:
+      printf("RIGHT_HYPER ");
+      break;
+    case KEYCODE_INSERT:
+      printf("INSERT ");
+      break;
+    case KEYCODE_HOME:
+      printf("HOME ");
+      break;
+    case KEYCODE_PG_UP:
+      printf("PG_UP ");
+      break;
+    case KEYCODE_DELETE:
+      printf("DELETE ");
+      break;
+    case KEYCODE_END:
+      printf("END ");
+      break;
+    case KEYCODE_PG_DOWN:
+      printf("PG_DOWN ");
+      break;
+    case KEYCODE_LEFT:
+      printf("LEFT ");
+      break;
+    case KEYCODE_RIGHT:
+      printf("RIGHT ");
+      break;
+    case KEYCODE_UP:
+      printf("UP ");
+      break;
+    case KEYCODE_DOWN:
+      printf("DOWN ");
+      break;
+    case KEYCODE_NUM_LOCK:
+      printf("NUM_LOCK ");
+      break;
+    case KEYCODE_KP_PLUS:
+      printf("KP_PLUS ");
+      break;
+    case KEYCODE_KP_MINUS:
+      printf("KP_MINUS ");
+      break;
+    case KEYCODE_KP_MULTIPLY:
+      printf("KP_MULTIPLY ");
+      break;
+    case KEYCODE_KP_DIVIDE:
+      printf("KP_DIVIDE ");
+      break;
+    case KEYCODE_KP_ENTER:
+      printf("KP_ENTER ");
+      break;
+    case KEYCODE_KP_HOME:
+      printf("KP_HOME ");
+      break;
+    case KEYCODE_KP_UP:
+      printf("KP_UP ");
+      break;
+    case KEYCODE_KP_PG_UP:
+      printf("KP_PG_UP ");
+      break;
+    case KEYCODE_KP_LEFT:
+      printf("KP_LEFT ");
+      break;
+    case KEYCODE_KP_FIVE:
+      printf("KP_FIVE ");
+      break;
+    case KEYCODE_KP_RIGHT:
+      printf("KP_RIGHT ");
+      break;
+    case KEYCODE_KP_END:
+      printf("KP_END ");
+      break;
+    case KEYCODE_KP_DOWN:
+      printf("KP_DOWN ");
+      break;
+    case KEYCODE_KP_PG_DOWN:
+      printf("KP_PG_DOWN ");
+      break;
+    case KEYCODE_KP_INSERT:
+      printf("KP_INSERT ");
+      break;
+    case KEYCODE_KP_DELETE:
+      printf("KP_DELETE ");
+      break;
+    case KEYCODE_F1:
+      printf("F1 ");
+      break;
+    case KEYCODE_F2:
+      printf("F2 ");
+      break;
+    case KEYCODE_F3:
+      printf("F3 ");
+      break;
+    case KEYCODE_F4:
+      printf("F4 ");
+      break;
+    case KEYCODE_F5:
+      printf("F5 ");
+      break;
+    case KEYCODE_F6:
+      printf("F6 ");
+      break;
+    case KEYCODE_F7:
+      printf("F7 ");
+      break;
+    case KEYCODE_F8:
+      printf("F8 ");
+      break;
+    case KEYCODE_F9:
+      printf("F9 ");
+      break;
+    case KEYCODE_F10:
+      printf("F10 ");
+      break;
+    case KEYCODE_F11:
+      printf("F11 ");
+      break;
+    case KEYCODE_F12:
+      printf("F12 ");
+      break;
+    default:
+      break;
+    }
+  }
+}
+
 
 /* --- E O F --- */
