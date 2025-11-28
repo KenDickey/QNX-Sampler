@@ -390,24 +390,40 @@ void printMouseButtons(int buttons) {
   }
 }
 
-void printModifiers(int modifiers) {
-
-  if (modifiers & KEYMOD_SHIFT_LOCK)
-    printf("Shift ");
-  if (modifiers & KEYMOD_CTRL_LOCK)
+void printModifiers(int modifiers) 
+{
+  if (modifiers & KEYMOD_SHIFT)
+    printf("SHIFT ");
+  if (modifiers & KEYMOD_CTRL)
     printf("CTRL ");
-  if (modifiers & KEYMOD_ALT_LOCK)
+  if (modifiers & KEYMOD_ALT)
     printf("ALT ");
-  if (modifiers & KEYMOD_ALTGR_LOCK)
+  if (modifiers & KEYMOD_ALTGR)
     printf("ALTGR ");
-  if (modifiers & KEYMOD_SHL3_LOCK)
+  if (modifiers & KEYMOD_SHL3)
     printf("SHL3 ");
-  if (modifiers & KEYMOD_MOD6_LOCK)
+  if (modifiers & KEYMOD_MOD6)
     printf("MOD6 ");
-  if (modifiers & KEYMOD_MOD7_LOCK)
+  if (modifiers & KEYMOD_MOD7)
     printf("MOD7 ");
-  if (modifiers & KEYMOD_MOD8_LOCK)
+  if (modifiers & KEYMOD_MOD8)
     printf("MOD8 ");
+  if (modifiers & KEYMOD_SHIFT_LOCK)
+    printf("ShiftLock ");
+  if (modifiers & KEYMOD_CTRL_LOCK)
+    printf("CTRLLock ");
+  if (modifiers & KEYMOD_ALT_LOCK)
+    printf("ALTLock ");
+  if (modifiers & KEYMOD_ALTGR_LOCK)
+    printf("ALTGRLock ");
+  if (modifiers & KEYMOD_SHL3_LOCK)
+    printf("SHL3Lock ");
+  if (modifiers & KEYMOD_MOD6_LOCK)
+    printf("MOD6Lock ");
+  if (modifiers & KEYMOD_MOD7_LOCK)
+    printf("MOD7Lock ");
+  if (modifiers & KEYMOD_MOD8_LOCK)
+    printf("MOD8Lock ");
   if (modifiers & KEYMOD_CAPS_LOCK)
     printf("CapsLock ");
   if (modifiers & KEYMOD_NUM_LOCK)
