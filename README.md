@@ -3,7 +3,9 @@ Exploratory code
 
 Get QNX free licence and directions at qnx.com/getqnx
 
-Install QNX software dev tools.  Compile instructions in each file
+- Install QNX software dev tools.  
+- in a Bash shell, `source sourceMe.sh`
+- Compile as per instructions in top of each file
 
 _qnxDisplayTest.c_ -- Opens a display-sized window and draws balloon images [see Balloon.h]. Setup window + buffer; fill region; draw individual pixels
 
